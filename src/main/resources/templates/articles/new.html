@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYDOCTOR</title>
+    <link rel="stylesheet" href="../css/css.css">
+    <link rel="stylesheet" href="../css/list.css">
+</head>
+<body>
+<div class="board_wrap">
+    <div class="board_title">
+        <strong>글쓰기</strong>
+        <p>궁금한 것들에 대해 작성해보세요!</p>
+    </div>
+    <form class="board_write_wrap" action="/articles/create" method="post">
+        <div class="board_write">
+            <div class="title">
+                <dl>
+                    <dt>제목</dt>
+                    <dd><input type="text" placeholder="제목 입력" name="title"></dd>
+                </dl>
+            </div>
+            <div class="info">
+            </div>
+            <div class="cont">
+                <textarea placeholder="내용 입력" name="content"></textarea>
+            </div>
+            <input type="hidden" name="roleType" th:value="${roleType}">
+        </div>
+        <div class="bt_wrap">
+            <button type="submit" class="submit">등록</button>
+        </div>
+    </form>
+    <form action="/articles/" method="post" class="cancle">
+        <input type="hidden" name="roleType" th:value="${roleType}">
+        <button type="submit" class="back">취소</button>
+    </form>
+</div>
+</body>
+</html>
+
+<!--형-->

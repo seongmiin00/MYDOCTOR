@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/login.css}"
+          href="../css/login.css" rel="stylesheet">
+    <title>MYDOCTOR</title>
+</head>
+<body>
+        <div class="login-wrapper">
+            <h2>MY DOCTOR</h2>
+
+            <div class="col">
+                <button class="w-100 btn btn-dark btn-lg" onclick="location.href='login/loginForm.html'"
+                        th:onclick="|location.href='@{/login}'|" type="button">
+                    로그인
+                </button>
+            </div>
+            <button class="links" type="button"
+                    th:onclick="|location.href='@{/signup/select}'|"> <!--SignUpController로 -->
+                회원 가입
+            </button>
+        </div>
+</body>
+</html>

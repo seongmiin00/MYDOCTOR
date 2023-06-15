@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>MYDOCTOR</title>
+
+    <link th:href="@{/css/signup.css}"
+          href="../css/signup.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="logo"><h1 style="font-size: 35px;">MY DOCTOR</h1></div>
+</body>
+
+<body>
+<form action="" th:action th:object="${member}" method="post">
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+    </div>
+
+    <div class="wrapper">
+        <div class="title"><h1 style="font-size: 21px;">회원가입</h1></div>
+        <div class="email">
+            <label for="loginId">아이디</label>
+            <input type="text" id="loginId"  placeholder="아이디를 입력해 주세요."
+                   th:field="*{loginId}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{loginId}" />
+        </div>
+
+        <div class="name">
+            <label for="name">이름</label>
+            <input type="text" id="name" placeholder="이름을 입력해 주세요."
+                   th:field="*{name}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{name}" />
+        </div>
+        <div class="password">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" placeholder="비밀번호를 입력해 주세요"
+                   th:field="*{password}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{password}" />
+        </div>
+
+        <div class="phone">
+            <label for="phone">전화번호</label>
+            <input type="text" id="phone" placeholder="전화번호를 입력해 주세요"
+                   th:field="*{phone}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{phone}" />
+
+        </div>
+
+
+        <div class="line">
+            <hr>
+        </div>
+        <div class="signUp">
+            <div class="col">
+                <button  style="background-color: #545bff;" type="submit">회원 가입</button>
+            </div>
+            <div class="col">
+                <button style="background-color: #545bff;" onclick="location.href='items.html'"
+                        th:onclick="|location.href='@{/}'|"
+                        type="button">뒤로가기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+</body>
+
+</html>

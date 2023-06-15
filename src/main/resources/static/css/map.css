@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    display: block;
+}
+#header {
+    text-align: center;
+    color: #fff;
+    width: 100%;
+}
+.Ngnb_service {
+    overflow: hidden;
+    height: 48px;
+    line-height: 48px;
+    background-color: #545bff;
+}
+._gnbTitle {
+    margin-left: 20px;
+    right: -24px;
+    position: relative;
+}
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 0px;
+}
+a {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+.maps {
+    margin-top: cm;
+}
+.searchbox {
+    background-color: #545bff;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+.searchbox input {
+    width: 90%;
+    height: 1cm;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px white;
+    padding: 0px 22px;
+    margin: 0px -10px;
+}
+.Nserver_item {
+    text-align: left;
+    margin-top: 0px;
+}
+.login_button {
+    cursor: pointer;
+    height: 30px;
+    width: 4cm;
+    margin-right: 40px;
+    float: right;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+    top: -58px;
+    left: -8px;
+    position: relative;
+    font-size: 16px;
+}
+.login_button:hover{
+    cursor: pointer;
+    height: 30px;
+    width: 4cm;
+    margin-right: 40px;
+    float: right;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+    top: -58px;
+    left: -8px;
+    position: relative;
+    font-size: 16px;
+}
+.Nservice_item{
+    background-color: #545bff;
+}
+
+.article_button {
+    cursor: pointer;
+    height: 30px;
+    width: 4cm;
+    /*margin-right: 40px;*/
+    float: right;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    /*border-radius: 10px;*/
+    top: -58px;
+    left: -8px;
+    position: relative;
+    font-size: 16px;
+}
+.article_button:hover{
+    cursor: pointer;
+    height: 30px;
+    width: 4cm;
+    /*margin-right: 40px;*/
+    float: right;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    /*border-radius: 10px;*/
+    top: -58px;
+    left: -8px;
+    position: relative;
+    font-size: 16px;
+}
+
+.mypage_button{
+    cursor: pointer;
+    height: 30px;
+    width: 4cm;
+    /* margin-right: 40px; */
+    float: right;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 10px 0px 0px 10px;
+    top: -58px;
+    left: -8px;
+    position: relative;
+    font-size: 16px;
+}
+.mypage_button:hover{
+    cursor: pointer;
+    height: 30px;
+    width: 4cm;
+    /*margin-right: 40px;*/
+    float: right;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px 0px 0px 10px;
+    top: -58px;
+    left: -8px;
+    position: relative;
+    font-size: 16px;
+}

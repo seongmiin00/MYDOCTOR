@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link  th:href="@{/css/map.css}"
+           href="css/map.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>MYDOCTOR</title>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac3fcf49666a42fa3ad401da41246823&libraries=services"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+    <div id="header" class="_header">
+        <header class="gnb">
+            <div class="Ngnb is_scale _gnbTopClass">
+                <div class="Ngnb_service">
+                    <h1 class="Nservice_item">
+                        <span class="Nicon_service _gnbTitle" style>MYDOCTOR</span>
+                    </h1>
+                    <div class="col">
+                        <form th:action="@{/logout}" method="post">
+                            <button class="login_button" onclick="location.href='login.html'" type="submit">
+                                로그아웃
+                            </button>
+                        </form>
+                    </div>
+                    <div class="article">
+                        <form th:action="@{/articles/}" method="post">
+                            <input type="hidden" name="roleType" th:value="${member.roleType}">
+                            <button type="submit" th:onclick="|location.href='@{/articles/}'|" class="article_button" >게시판</button>
+                        </form>
+                    </div>
+                    <div class="mypage">
+                        <button type="button" th:onclick="|location.href='@{/members/info}'|" class="mypage_button">마이페이지</button>
+                    </div>
+                </div>
+                <div class="searchbox">
+                    <input id="address" type="text" placeholder="주소 검색" onkeydown="if(event.keyCode==13) javascript:searchBtn();">
+                </div>
+                <div class="maps">
+                    <div id="map" style="width:100%;height:85vh;"></div>
+                </div>
+                <script>
+                    var markers = [];
+
+                    var infowindow = new kakao.maps.InfoWindow({zIndex:1,removable:true});
+
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                        mapOption = {
+                            center: new kakao.maps.LatLng(37.551086, 126.988033), // 지도의 중심좌표
+                            level: 7 // 지도의 확대 레벨
+                        };
+
+                    // 지도를 생성합니다
+                    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+                    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+                    var zoomControl = new kakao.maps.ZoomControl();
+                    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+                    // 장소 검색 객체를 생성합니다
+                    var ps = new kakao.maps.services.Places(map);
+
+                    // 카테고리로 은행을 검색합니다
+                    ps.categorySearch('hp8', placesSearchCB, {useMapBounds: true});
+
+                    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+                    function placesSearchCB(data, status, pagination) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            for (var i = 0; i < data.length; i++) {
+                                displayMarker(data[i]);
+                            }
+                        }
+                    }
+
+                    // 지도에 마커를 표시하는 함수입니다
+                    function displayMarker(place) {
+                        // 마커를 생성하고 지도에 표시합니다
+                        var marker = new kakao.maps.Marker({
+                            map: map,
+                            position: new kakao.maps.LatLng(place.y, place.x)
+                        });
+
+                        // 마커에 클릭이벤트를 등록합니다
+                        kakao.maps.event.addListener(marker, 'click', function () {
+                            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                            infowindow.setContent('<div style="padding:16px;font-size:15px;width:330px;height:158px;text-align: center;">' +
+                                '<strong style="font-weight:600;font-size:19px;color:black">' + place.place_name + '</strong>' + '<br>' +
+                                '<p style="color:#808080">' + '지번 주소 - ' + place.address_name + '<br>' + '도로명 - ' + place.road_address_name +
+                                '<br>' + '</p>' + '<p style="color:#235dfc;font-size:16px;">' + place.phone + '<br>' +
+                                '<div style="text-align:center;border:solid 1px #235dfc;padding:10px 0px;' +
+                                'border-radius:3px;background-color:#235dfc">' +
+                                '<a href="dmembers/info" style="text-decoration:none;color:white;font-weight:600">병원 상세 정보 보기</a>' +
+                                '</div>' + '</p>' + '</div>');
+                            infowindow.open(map, marker);
+                        });
+
+                        markers.push(marker);
+                    }
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    function searchBtn() {
+                        map.setLevel(6);
+                        function setMarkers(map) {
+                            for (var i = 0; i < markers.length; i++) {
+                                markers[i].setMap(map);
+                            }
+                        }
+                        setMarkers(null);
+
+                        // 버튼을 click했을때
+                        var addr = document.getElementById('address').value;
+
+                        // 주소로 좌표를 검색합니다
+                        geocoder.addressSearch(addr, function(result, status) {
+                            // 정상적으로 검색이 완료됐으면
+                            if (status === kakao.maps.services.Status.OK) {
+
+                                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                map.setCenter(coords);
+
+                                // 카테고리로 은행을 검색합니다
+                                ps.categorySearch('hp8', placesSearchCB, {useMapBounds: true});
+
+                                // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+                                function placesSearchCB(data, status, pagination) {
+                                    if (status === kakao.maps.services.Status.OK) {
+                                        for (var i = 0; i < data.length; i++) {
+                                            displayMarker(data[i]);
+                                        }
+                                    }
+                                }
+
+                                // 지도에 마커를 표시하는 함수입니다
+                                function displayMarker(place) {
+                                    // 마커를 생성하고 지도에 표시합니다
+                                    var marker = new kakao.maps.Marker({
+                                        map: map,
+                                        position: new kakao.maps.LatLng(place.y, place.x)
+                                    });
+
+                                    // 마커에 클릭이벤트를 등록합니다
+                                    kakao.maps.event.addListener(marker, 'click', function () {
+                                        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                                        infowindow.setContent('<div style="padding:16px;font-size:15px;width:300px;height:175px">' +
+                                            '<strong style="font-weight:600;font-size:19px;color:black">' + place.place_name + '</strong>' + '<br>' +
+                                            '<p style="color:#808080">' + '지번 주소 - ' + place.address_name + '<br>' + '도로명 - ' + place.road_address_name +
+                                            '<br>' + '</p>' + '<p style="color:#235dfc;font-size:16px;">' + place.phone + '<br>' +
+                                            '<div style="text-align:center;border:solid 1px #235dfc;padding:10px 0px;' +
+                                            'border-radius:3px;background-color:#235dfc">' +
+                                            '<a href="병원 상세페이지" style="text-decoration:none;color:white;font-weight:600">병원 상세 정보 보기</a>' +
+                                            '</div>' + '</p>' + '</div>');
+                                        infowindow.open(map, marker);
+                                    });
+
+                                    markers.push(marker);
+                                }
+                            }else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+
+                                alert('검색 결과가 존재하지 않습니다.');
+                                return;
+
+                            } else if (status === kakao.maps.services.Status.ERROR) {
+
+                                alert('검색 결과 중 오류가 발생했습니다.');
+                                return;
+
+                            }
+                        });
+                    };
+                </script>
+            </div>
+        </header>
+    </div>
+</body>
+</html>

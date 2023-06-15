@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYDOCTOR</title>
+    <link rel="stylesheet" href="../css/css.css">
+</head>
+<body>
+<div class="board_wrap">
+    <div class="board_title">
+        <strong>MY DOCTOR 게시판</strong>
+        <p>궁금한게있으면 물어보세요!</p>
+    </div>
+    <div class="board_list_wrap">
+        <div class="board_list">
+            <div class="top">
+                <div class="num">번호</div>
+                <div class="title">제목</div>
+                <div class="writer">유형</div>
+                <div class="date">작성일</div>
+                <div class="count">조회</div>
+            </div>
+            <div th:each="article : ${articleList}">
+                    <div class="num" th:text="${article.id}">5</div>
+                    <div class="title" >
+                        <form th:action="@{/articles/{articleId}(articleId=${article.id})}" method="post">
+                            <input type="hidden" name="roleType" th:value="${roleType}">
+                            <input type="submit" th:value="${article.title}" class="con_title">
+                        </form>
+                    </div>
+                    <div class="writer" th:text="${article.roleType}">황휘태</div>
+                    <div class="date">23.06.15</div>
+                    <div class="count">0</div>
+            </div>
+
+        </div>
+<!--        <div class="board_page">-->
+<!--            <a href="#" class="bt first"><<</a>-->
+<!--            <a href="#" class="bt prev"><</a>-->
+<!--            <a href="#" class="num on">1</a>-->
+<!--            <a href="#" class="num">2</a>-->
+<!--            <a href="#" class="num">3</a>-->
+<!--            <a href="#" class="num">4</a>-->
+<!--            <a href="#" class="num">5</a>-->
+<!--            <a href="#" class="bt next">></a>-->
+<!--            <a href="#" class="bt last">>></a>-->
+<!--        </div>-->
+    </div>
+    <div class="bt_wrap">
+        <form action="/articles/new" method="post">
+            <input type="hidden" name="roleType" th:value="${roleType}">
+            <button type="submit" class="on">새 글쓰기</button>
+            <span th:if="${roleType} == ${rt} ">
+                <a href="/">HOME</a>
+            </span>
+            <span th:unless="${roleType} == ${rt} ">
+                <a href="/d">HOME</a>
+            </span>
+        </form>
+
+        <!--<a href="#">수정</a>-->
+    </div>
+</div>
+
+</body>
+</html>
+

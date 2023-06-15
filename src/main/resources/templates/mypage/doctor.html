@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../css/mypage.css">
+    <title>MYDOCTOR</title>
+</head>
+<script>
+    function popup(){
+        var url = "/chat";
+        var name = "MYDOCTOR 채팅";
+        var option = "width = 390, height = 691, top = 80, left = 600, location = no"
+        window.open(url, name, option);
+    }
+</script>
+<body>
+   <!-- <div class="logo">
+        <h1>MY DOCTOR</h1> -->
+        <!-- </div> -->
+
+    <div id="wrapper">
+    <section id="intro" class="main">
+      <div class="info">
+        <div class="content">
+          <header class="major">
+          <h2>MY DOCTOR</h2>
+        </header>
+        <div>
+          병원명 : <span th:text="${doctor.DName}"></span><br>
+<!--          위치 : <span th:text="${doctor.addr}"></span>-->
+            <br>
+          정보 : <span th:text="${doctor.info}"></span> <br>
+<!--          전화 번호 : <span th:text="${doctor.DPhone}"></span>-->
+            <br>
+          진료 과목 : <span th:text="${doctor.sub}"></span>
+
+        </div>
+        <ul class="actions">
+          <li>
+            <button onclick="popup()" class="chat">chat</button >
+          </li>
+        </ul>
+        <div class="article">
+            <form th:action="@{/articles/}" method="post">
+                <input type="hidden" name="roleType" th:value="${doctor.roleType}">
+                <button type="submit" onclick="|location.href='@{/articles/}'|" class="board" >게시판</button>
+            </form>
+        </div>
+        <div class="logout">
+            <form th:action="@{/logout}" method="post">
+                <button class="login_button" onclick="location.href='login.html'" type="submit">
+                    로그아웃
+                </button>
+            </form>
+        </div>
+      </div>
+      <span class="image">
+        <img src="../css/pic01.jpeg"alt>
+      </span>
+    </div>
+    </section>
+    
+    
+    
+<!--    <section id="first" class="main special">-->
+<!--      <header class="major">-->
+<!--        <h2>진료 기록</h2>-->
+<!--      </header>-->
+<!--      <ul class="features">-->
+<!--        <li>-->
+<!--          <span class="m1"></span>-->
+<!--          <h3>2023-06-10 김**</h3>-->
+<!--          <p>감기.</p>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <span class="m2"></span>-->
+<!--          <h3>2023-06-09 김**</h3>-->
+<!--          <p>두통.</p>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <span class="m3"></span>-->
+<!--          <h3>2023-06-08 황**</h3>-->
+<!--          <p>복통.</p>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--     -->
+<!--    -->
+<!--    </section>-->
+  </div> 
+</div>
+
+      
+</body>
+</html>

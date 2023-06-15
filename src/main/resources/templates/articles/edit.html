@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYDOCTOR</title>
+    <link rel="stylesheet" th:href="@{/css/css.css}" href="../css/css.css"/>
+    <link rel="stylesheet" th:href="@{/css/list.css}" href="../css/list.css"/>
+</head>
+<body>
+<div class="board_wrap">
+    <div class="board_title">
+        <strong>글쓰기</strong>
+        <p>궁금한 것들에 대해 작성해보세요!</p>
+    </div>
+    <form class="board_write_wrap" th:action="@{/articles/update}" th:object="${article}" method="post">
+        <input name="id" type="hidden" th:field="*{id}">
+        <div class="board_write">
+            <div class="title">
+                <dl>
+                    <dt>제목</dt>
+                    <dd><input type="text" placeholder="제목 입력" th:field="*{title}"></dd>
+                </dl>
+            </div>
+            <div class="info">
+                <!--                <dl>-->
+                <!--                    <dt>글쓴이</dt>-->
+                <!--                    <dd><input type="text" placeholder="글쓴이 입력"></dd>-->
+                <!--                </dl>-->
+                <!--                <dl>-->
+                <!--                    <dt>비밀번호</dt>-->
+                <!--                    <dd><input type="password" placeholder="비밀번호 입력"></dd>-->
+                <!--                </dl>-->
+            </div>
+            <div class="cont">
+                <textarea placeholder="내용 입력" th:field="*{content}"></textarea>
+            </div>
+            <input type="hidden" name="roleType" th:value="${roleType}">
+        </div>
+        <div class="edit_form">
+            <button type="submit" class="submit">수정</button>
+        </div>
+    </form>
+    <form th:action="@{/articles/{articleId}(articleId=${article.id})}" method="post" class="cancle_form">
+        <input type="hidden" name="roleType" th:value="${roleType}">
+        <button type="submit" class="cancle">취소</button>
+    </form>
+</div>
+</body>
+</html>
+

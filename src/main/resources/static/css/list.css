@@ -1,0 +1,53 @@
+button.submit {
+    display: inline-block;
+    min-width: 250px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.8rem;
+    background: #545bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.edit_form {
+    text-align: center;
+    margin-top: 10px;
+}
+
+form.cancle_form {
+    text-align: center;
+    margin-top: 10px;
+}
+
+form.cancle {
+    text-align: center;
+    margin-top: 10px;
+}
+
+button.cancle {
+    display: inline-block;
+    min-width: 250px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.8rem;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+}
+
+button.back {
+    display: inline-block;
+    min-width: 250px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.8rem;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+}

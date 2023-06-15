@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/info.css}"
+          href="css/info.css">
+    <title>MYDOCTOR</title>
+
+</head>
+<script>
+    function popup(){
+        var url = "/chat";
+        var name = "MYDOCTOR 채팅";
+        var option = "width = 390, height = 691, top = 80, left = 600, location = no"
+        window.open(url, name, option);
+    }
+</script>
+<body>
+<div class="con" th:each="dmember:${dmembers}">
+    <div id="wrap" class="wrap_mapdetail">
+        <div id="mArticle">
+            <div data-viewid="basicInfo" class="cont_essential">
+                <div data-viewid="basicInfoTop" data-root="">
+                    <div class="details_present" style="background:none;">
+                        <a href="#none" class="link_present" data-logtarget="" data-logevent="info_pannel,main_pic">
+                                <span class="bg_present">
+                                    <span class="frame_g"></span>
+                                    <img src="../css/pic01.jpeg" width="998px" height="339px"></span>
+                        </a>
+                    </div>
+                    <div class="place_details">
+                        <div class="inner_place">
+                            <h2 class="tit_location" th:text="${dmember.DName}"></h2>
+                            <div class="location_evaluation">
+                                <h4 class="txt_location">진료 과목 - <span class="screen_out" th:text="${dmember.sub}"></span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-viewid="basicInfo" data-root="" class="details_placeinfo">
+            <h4 class="tit_subject">병원 소개</h4>
+            <div class="info" th:text="${dmember.info}"></div>
+            <div class="placeinfo_default">
+                <h4 class="tit_detail">주소 - <span class="txt_address" th:text="${dmember.addr}"></span></h4>
+            </div>
+            <div class="placeinfo_default placeinfo_contact">
+                <h4 class="tit_detail">전화번호 :
+                    <span class="info" th:text="${dmember.DPhone}"></span>
+                </h4>
+            </div>
+            <div class="placeinfo_default">
+                <h4 class="tit_detail">진료 여부 : <span class="location_detail">진료가능</span></h4>
+
+            </div>
+        </div>
+    </div>
+    <div class="diagnosis">
+    <button id="diagnosisButton" onclick="popup()" button style="background-color: #545bff;">진료받기</button>
+    </div>
+    <button onclick="location.href='/'" class="home">HOME</button >
+</div>
+</body>
+
+</html>
